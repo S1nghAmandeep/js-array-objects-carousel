@@ -68,10 +68,14 @@ const downBtnDomEl = document.querySelector('.down');
 // console.log(downBtnDomEl)
 
 downBtnDomEl.addEventListener('click', function () {
-    console.log(downBtnDomEl)
+    // console.log(downBtnDomEl)
 
     scrollDomEl[indexImages].classList.remove('active');
-    indexImages ++
+    if (indexImages < scrollDomEl.length - 1) {
+        indexImages ++
+    } else {
+        indexImages = 0
+    }
     scrollDomEl[indexImages].classList.add('active')
 })
 
@@ -80,8 +84,11 @@ const upBtnDomEl = document.querySelector('.up');
 upBtnDomEl.addEventListener('click', function () {
     // console.log(upBtnDomEl)
 
-        scrollDomEl[indexImages].classList.remove('active');
-       indexImages --
-        
+    scrollDomEl[indexImages].classList.remove('active');
+    if (indexImages === 0) {
+        indexImages = scrollDomEl.length - 1
+    } else {
+        indexImages --
+    }
     scrollDomEl[indexImages].classList.add('active')
 })
