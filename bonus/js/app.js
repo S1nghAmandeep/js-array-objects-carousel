@@ -31,22 +31,25 @@ const images = [
 
 console.log(images)
 
-const imageCardDomEl = document.querySelector('.images-card');
+const imageCardDomEl = document.getElementById('big-card');
 console.log(imageCardDomEl)
+const minerCardDomEl = document.querySelector('.miner-img');
+console.log(minerCardDomEl)
 
 // ciclare l'array di oggetti per poter inserire nel dom
+
+let image = ''
 
 for (let i = 0; i < images.length; i++) {
 
     const infoCard = images[i];
     // console.log(infoCard);
 
-    const image = infoCard.image;
+    image = infoCard.image;
     const title = infoCard.title;
     const text = infoCard.text;
 
     const cardString = `
-    <div>
         <figure class="hide">
             <img src="./${image}" alt="">
             <div class="description">
@@ -54,22 +57,27 @@ for (let i = 0; i < images.length; i++) {
                 <p>${text}</p>
             </div>
         </figure>
-        <div class="miner-img grey">
-            <img src="./${image}" alt="">
-        </div>
+    `
+    const minerString = `
+    <div class="grey">
+        <img src="./${image}" alt="">
     </div>
     `
+    minerCardDomEl.innerHTML += minerString;
     imageCardDomEl.innerHTML += cardString;
-    console.log(imageCardDomEl)
+
+    // console.log(imageCardDomEl, minerCardDomEl)
 }
+
+
 
 const scrollDomEl = document.querySelectorAll('.hide');
 console.log(scrollDomEl)
 
-const minerDomEl = document.querySelectorAll('.miner-img');
+const minerDomEl = document.querySelectorAll('.grey');
 console.log(minerDomEl)
 
-let indexImages = 1;
+let indexImages = 0;
 scrollDomEl[indexImages].classList.add('active');
 minerDomEl[indexImages].classList.add('select')
 console.log(minerDomEl)
