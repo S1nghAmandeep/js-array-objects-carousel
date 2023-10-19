@@ -22,11 +22,11 @@
     bottom: 25px;
     text-align: right;
     color: white;
-    font-size: 15px;
+    font-size: 18px;
 }
 
-.images {
-    width: 500px;
+.images-card {
+    width: 100%;
     position: relative;
 }
 
