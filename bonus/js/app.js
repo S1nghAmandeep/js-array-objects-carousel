@@ -46,11 +46,16 @@ for (let i = 0; i < images.length; i++) {
     const text = infoCard.text;
 
     const cardString = `
-    <div class="hide">
-        <img src="./${image}" alt="">
-        <div class="description">
-            <h3>${title}</h3>
-            <p>${text}</p>
+    <div>
+        <figure class="hide">
+            <img src="./${image}" alt="">
+            <div class="description">
+                <h3>${title}</h3>
+                <p>${text}</p>
+            </div>
+        </figure>
+        <div class="miner-img grey">
+            <img src="./${image}" alt="">
         </div>
     </div>
     `
@@ -61,34 +66,48 @@ for (let i = 0; i < images.length; i++) {
 const scrollDomEl = document.querySelectorAll('.hide');
 console.log(scrollDomEl)
 
-let indexImages = 0;
+const minerDomEl = document.querySelectorAll('.miner-img');
+console.log(minerDomEl)
+
+let indexImages = 1;
 scrollDomEl[indexImages].classList.add('active');
+minerDomEl[indexImages].classList.add('select')
+console.log(minerDomEl)
 
 const downBtnDomEl = document.querySelector('.down');
 // console.log(downBtnDomEl)
 
+
+// prelevato il pulsante down dal dom
 downBtnDomEl.addEventListener('click', function () {
     // console.log(downBtnDomEl)
 
     scrollDomEl[indexImages].classList.remove('active');
-    if (indexImages < scrollDomEl.length - 1) {
+    minerDomEl[indexImages].classList.remove('select')
+    if (indexImages < scrollDomEl.length - 1 && indexImages < minerDomEl.length - 1) {
         indexImages ++
     } else {
         indexImages = 0
     }
     scrollDomEl[indexImages].classList.add('active')
+    minerDomEl[indexImages].classList.add('select')
 })
 
+
+// prelevato il pulsante up dal dom
 const upBtnDomEl = document.querySelector('.up');
 
 upBtnDomEl.addEventListener('click', function () {
-    // console.log(upBtnDomEl)
+// console.log(upBtnDomEl)
 
     scrollDomEl[indexImages].classList.remove('active');
+    minerDomEl[indexImages].classList.remove('select')
     if (indexImages === 0) {
         indexImages = scrollDomEl.length - 1
+        indexImages = minerDomEl.length - 1
     } else {
         indexImages --
     }
     scrollDomEl[indexImages].classList.add('active')
+    minerDomEl[indexImages].classList.add('select')
 })
