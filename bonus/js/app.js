@@ -38,14 +38,10 @@ console.log(minerCardDomEl)
 
 // ciclare l'array di oggetti per poter inserire nel dom
 
-let image = ''
 
-for (let i = 0; i < images.length; i++) {
-
-    const infoCard = images[i];
-    // console.log(infoCard);
-
-    image = infoCard.image;
+images.forEach(infoCard => {
+    
+    const image = infoCard.image;
     const title = infoCard.title;
     const text = infoCard.text;
 
@@ -67,9 +63,8 @@ for (let i = 0; i < images.length; i++) {
     imageCardDomEl.innerHTML += cardString;
 
     // console.log(imageCardDomEl, minerCardDomEl)
-}
 
-
+});
 
 const scrollDomEl = document.querySelectorAll('.hide');
 console.log(scrollDomEl)
@@ -87,27 +82,44 @@ const downBtnDomEl = document.querySelector('.down');
 
 
 // prelevato il pulsante down dal dom
-downBtnDomEl.addEventListener('click', function () {
-    // console.log(downBtnDomEl)
+downBtnDomEl.addEventListener('click', nextSlide);
+console.log(downBtnDomEl)
 
+
+// prelevato il pulsante up dal dom
+const upBtnDomEl = document.querySelector('.up');
+upBtnDomEl.addEventListener('click', prevSlide);
+
+let autoPlay = setInterval(nextSlide, 3000);
+console.log(setInterval);
+
+
+const cardDmnEl = document.querySelector('.images-card');
+console.log(cardDmnEl);
+
+cardDmnEl.addEventListener('mouseenter', () => {
+    console.log('Mouse enter');
+    clearInterval(autoPlay);
+})
+cardDmnEl.addEventListener('mouseleave', () => {
+    console.log('Mouse leave');
+    autoPlay = setInterval(nextSlide, 3000);
+})
+
+function nextSlide() {
+    
     scrollDomEl[indexImages].classList.remove('active');
-    minerDomEl[indexImages].classList.remove('select')
+    minerDomEl[indexImages].classList.remove('select');
     if (indexImages < scrollDomEl.length - 1 && indexImages < minerDomEl.length - 1) {
         indexImages ++
     } else {
         indexImages = 0
     }
-    scrollDomEl[indexImages].classList.add('active')
-    minerDomEl[indexImages].classList.add('select')
-})
+    scrollDomEl[indexImages].classList.add('active');
+    minerDomEl[indexImages].classList.add('select');
+}
 
-
-// prelevato il pulsante up dal dom
-const upBtnDomEl = document.querySelector('.up');
-
-upBtnDomEl.addEventListener('click', function () {
-// console.log(upBtnDomEl)
-
+function prevSlide() {
     scrollDomEl[indexImages].classList.remove('active');
     minerDomEl[indexImages].classList.remove('select')
     if (indexImages === 0) {
@@ -118,4 +130,4 @@ upBtnDomEl.addEventListener('click', function () {
     }
     scrollDomEl[indexImages].classList.add('active')
     minerDomEl[indexImages].classList.add('select')
-})
+}
